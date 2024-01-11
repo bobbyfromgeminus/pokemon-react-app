@@ -19,14 +19,14 @@ function MyPokemons({setComponent, myPokemonsName, setMyPokemons}) {
           getMyPokemonData(name);
         });
         setMyPokemons(myPokemonArray);
-        setTimeout(()=>setComponent('PokemonSelector'), 1000);
+        setTimeout(()=>setComponent('PokemonSelector'), 300);
     }, [myPokemonsName, setMyPokemons, setComponent]);
 
 
 
     return (
-        <div className="mypokemons">
-            <p onClick={()=>setComponent('PokemonSelector')}>Pokemonjaim letöltése folyamatban.</p>
+        <div className="mypokemons flex-column h-100 a-center j-center">
+            loading data...
         </div>
     );
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PokemonBattleCard  from './PokemonBattleCard';
 
 function BattleField({ setComponent, opponent, selectedPokemon, myPokemonsName, setMyPokemonsName, setFinish }) {
 
@@ -12,12 +13,18 @@ function BattleField({ setComponent, opponent, selectedPokemon, myPokemonsName, 
     const [roundCounter, setRoundCounter] = useState(0);
 
     const [opponentStats, setOpponentStats] = useState({
+        name: opponent.name,
+        img: opponent.sprites.other.showdown.front_default,
+        maxhp: opponent.stats[0].base_stat,
         hp: opponent.stats[0].base_stat,
         attack: opponent.stats[1].base_stat,
         defense: opponent.stats[2].base_stat,
     });
 
     const [myheroStats, setMyheroStats] = useState({
+        name: selectedPokemon.name,
+        img: selectedPokemon.sprites.other.showdown.front_default,
+        maxhp: selectedPokemon.stats[0].base_stat,
         hp: selectedPokemon.stats[0].base_stat,
         attack: selectedPokemon.stats[1].base_stat,
         defense: selectedPokemon.stats[2].base_stat,
@@ -66,7 +73,7 @@ function BattleField({ setComponent, opponent, selectedPokemon, myPokemonsName, 
         const hpReducer = ((((2/5+2)*B.attack*60/D.defense)/50)+2)*Z/255;
         if (roundCounter%2 === 0) {
             const reducedPokemon = myheroStats;
-            reducedPokemon.hp = myheroStats.hp - hpReducer;
+            reducedPokemon.hp = Math.round((myheroStats.hp - hpReducer) * 100) / 100;
             setMyheroStats(reducedPokemon);
             if (myheroStats.hp <= 0) {
                 // itt én veszítettem
@@ -75,7 +82,7 @@ function BattleField({ setComponent, opponent, selectedPokemon, myPokemonsName, 
             }
         } else {
             const reducedPokemon = opponentStats;
-            reducedPokemon.hp = opponentStats.hp - hpReducer;
+            reducedPokemon.hp = Math.round((opponentStats.hp - hpReducer) * 100) / 100
             setOpponentStats(reducedPokemon);
             if (opponentStats.hp <= 0) {
                 // itt én nyertem
@@ -88,34 +95,20 @@ function BattleField({ setComponent, opponent, selectedPokemon, myPokemonsName, 
 
     return (
         <div className="battlefield flex-column">
-            <h1>BattleField</h1>
-            <div>
-                <h2>ellenfél: {opponent.name}</h2>
-                <h3>{roundCounter}</h3>
-                <img alt="opponent" className="pixelated" src={opponent.sprites.other.showdown.front_default}/>
-                <ul>
-                    <li>hp: {opponentStats.hp}</li>
-                    <li>attack: {opponentStats.attack}</li>
-                    <li>defense: {opponentStats.defense}</li>
-                </ul>
+            <h2>{opponentStats.name} vs {myheroStats.name}</h2>
+            <br/>
+            <div className="flex">
+                <PokemonBattleCard pokemon={opponentStats}/>
+                <PokemonBattleCard pokemon={myheroStats}/>
             </div>
-            <div>
-                <h2>harcosom: {selectedPokemon.name}</h2>
-                <img alt="mypokemon" className="pixelated" src={selectedPokemon.sprites.other.showdown.front_default}/>
-                <ul>
-                    <li>hp: {myheroStats.hp}</li>
-                    <li>attack: {myheroStats.attack}</li>
-                    <li>defense: {myheroStats.defense}</li>
-                </ul>
-            </div>
-            <button onClick={() => battleRound()}>HARC!!!</button>
+            <button onClick={() => battleRound()}>FIGHT!!!</button>
             <br/>
             <br/>
             {
                 endOfGame ? (
-                    <p>vége a játéknak</p>
+                    <p>GAME OVER</p>
                 ) : (
-                    <p>zajlik a csata</p>
+                    <p>The battle is going on, we are in the round #{roundCounter}</p>
                 )
             }
         </div>

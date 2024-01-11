@@ -55,7 +55,7 @@ function Location({setComponent, location, setOpponent, opponent}) {
 
     return (
         <div className="location flex-column">
-            <h1>Location: {location.name}</h1>
+            <h1>{location.name}</h1>
             
             {
                 !opponent.empty ? (

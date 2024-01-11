@@ -6,6 +6,7 @@ import MyPokemons from './components/MyPokemons';
 import PokemonSelector from './components/PokemonSelector';
 import BattleField  from './components/BattleField';
 import Finish  from './components/Finish';
+import Header  from './components/Header';
 import Inventory  from './components/Inventory';
 
 function App() {
@@ -82,6 +83,8 @@ function App() {
     // Finish
     else if (component === 'Finish') {
       componentContainer =  <Finish           setComponent={setComponent}
+                                              selectedPokemon={selectedPokemon}
+                                              opponent={opponent}
                                               finish={finish}
                             />;
     }
@@ -91,6 +94,7 @@ function App() {
 
   return (
     <div className="App">
+        <Header component={component}/>
         <div>
           {componentContainer}
         </div>
