@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PokemonCard from "./PokemonCard";
 
 function Location({setComponent, location, setOpponent, opponent}) {
 
@@ -48,23 +49,28 @@ function Location({setComponent, location, setOpponent, opponent}) {
         }, [location, setOpponent]
     );
 
+    const handleClick = (pokemon) => {
+        alert(`${pokemon.name} says: Wroaaarh!!!`);
+    }
+
     return (
-        <div className="location">
+        <div className="location flex-column">
             <h1>Location: {location.name}</h1>
             
             {
                 !opponent.empty ? (
                     <div className="flex-column">
-                        <h2>ellenfél: {opponent.name}</h2>
-                        <img alt="pokemon" className="pixelated" src={opponent.sprites.other.showdown.front_default}/>
+                        <h2>I think we have a challenger...</h2>
+                        <br/>
+                        <PokemonCard handleClick={handleClick} pokemon={opponent}/>
                         <button onClick={() => {setComponent('MyPokemons')}}>Choose one of your Pokemon!</button>
                     </div>
                 ) : (
-                    <button onClick={() => {setComponent('Locations')}}>Sajnos itt nem lesz csata!</button>
+                    <button onClick={() => {setComponent('Locations')}}>Unfortunately, there is nothing to see here. Choose another location!</button>
                 )
             }
         </div>
-    );
+    )
 }
   
 export default Location;

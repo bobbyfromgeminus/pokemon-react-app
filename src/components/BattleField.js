@@ -87,7 +87,7 @@ function BattleField({ setComponent, opponent, selectedPokemon, myPokemonsName, 
     }
 
     return (
-        <div className="battlefield">
+        <div className="battlefield flex-column">
             <h1>BattleField</h1>
             <div>
                 <h2>ellenfél: {opponent.name}</h2>

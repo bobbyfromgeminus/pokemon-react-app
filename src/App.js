@@ -6,6 +6,7 @@ import MyPokemons from './components/MyPokemons';
 import PokemonSelector from './components/PokemonSelector';
 import BattleField  from './components/BattleField';
 import Finish  from './components/Finish';
+import Inventory  from './components/Inventory';
 
 function App() {
 
@@ -95,7 +96,7 @@ function App() {
         </div>
         <br/>
         <br/>
-        <h5>{myPokemonsName.length} Pokemonom van.</h5>
+        <Inventory items={myPokemonsName.length}/>
     </div>
   );
 

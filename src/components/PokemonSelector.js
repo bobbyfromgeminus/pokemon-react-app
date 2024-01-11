@@ -8,10 +8,10 @@ function PokemonSelector({opponent, setComponent, myPokemons, setSelectedPokemon
     }
 
     return (
-        <div className="pokemonselector">
+        <div className="pokemonselector flex-column">
             <h1>PokemonSelector</h1>
             <PokemonCard pokemon={opponent}/>
-            <h1>Pokemonjaim</h1>
+            <h2>Choose a Pokémon to defeat {opponent.name}!</h2>
             <div className="card-container">
                 {   myPokemons.map((myPokemon, index) => (
                         <PokemonCard handleClick={handleClick} key={index} pokemon={myPokemon}/>
