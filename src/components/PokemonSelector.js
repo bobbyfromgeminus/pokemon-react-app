@@ -7,10 +7,14 @@ function PokemonSelector({opponent, setComponent, myPokemons, setSelectedPokemon
         setComponent('BattleField');
     }
 
+    const handleClick2 = (pokemon) => {
+        alert(`${pokemon.name} says: Wroaaarh!!!`);
+    }
+
     return (
         <div className="pokemonselector flex-column">
             <h2>Opponent</h2>
-            <PokemonCard pokemon={opponent}/>
+            <PokemonCard handleClick={handleClick2} pokemon={opponent}/>
             <br/>
             <br/>
             <h2>Choose a Pokémon to defeat {opponent.name}!</h2>
