@@ -1,3 +1,5 @@
+import PokemonCard from "./PokemonCard";
+
 function PokemonSelector({opponent, setComponent, myPokemons, setSelectedPokemon}) {
 
     const handleClick = (myPokemon) => {
@@ -8,12 +10,14 @@ function PokemonSelector({opponent, setComponent, myPokemons, setSelectedPokemon
     return (
         <div className="pokemonselector">
             <h1>PokemonSelector</h1>
-            <div>Ellenfél: {opponent.name}</div>
-            <h1>Sajátjaim:</h1>
-            {   myPokemons.map((myPokemon, index) => (
-                    <div onClick={ () => handleClick(myPokemon)} key={index}>{myPokemon.name}</div>
-                ))
-            }
+            <PokemonCard pokemon={opponent}/>
+            <h1>Pokemonjaim</h1>
+            <div className="card-container">
+                {   myPokemons.map((myPokemon, index) => (
+                        <PokemonCard handleClick={handleClick} key={index} pokemon={myPokemon}/>
+                    ))
+                }
+            </div>
         </div>
     );
 }

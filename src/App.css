@@ -15,13 +15,35 @@ body {
 }
 
 .App {
-  width: 800px;
-  height: 600px;
+  width: 1000px;
+  height: 700px;
   padding: 2rem;
   background-color: white;
 }
 
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: self-start;
+  justify-content: space-between;
+}
 
+.pokemon-card {
+  border: 1px solid cornflowerblue;
+  border-radius: 5px;
+  padding: .5rem 1rem;
+  width: 170px;
+
+}
+
+.pokemon-card .img {
+  width: 70%;
+  margin: auto;
+  padding-bottom: 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 
 .flex-column {
   width: 200px;
