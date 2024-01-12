@@ -24,13 +24,21 @@ body {
 
 .App {
   width: 1000px;
-  height: 700px;
+  height: 750px;
   padding: 2rem;
   background-color: rgba(250, 250, 250, .7);
   position: relative;
   overflow: hidden;
   border-radius: 1rem;
   backdrop-filter: blur(.3rem);
+  animation: app_anim 1s ease-in-out;
+  opacity: 1;
+}
+
+@keyframes app_anim {
+  0% {height: 0px; padding: 0rem; opacity: 0;}
+  50% {height: 0px; padding: 0rem; opacity: 0;}
+  100% {height: 750px; padding: 2rem; opacity: 1;}
 }
 
 .card-container {
@@ -49,10 +57,9 @@ body {
 }
 
 .locations-container div {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   margin: .5rem;
-  padding: .3rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -61,15 +68,40 @@ body {
   border: 1px solid #61ADBC;
   border-radius: 5px;
   cursor: pointer;
-  background-color: rgba(255, 255, 255, .4);
-  color: #306B84;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: azure;
   transition: all .2s ease-in-out;
+  position: relative;
+}
+
+.locations-container div p {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .3);
+  color: white;
+  padding: .2rem .5rem;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.locations-container div:hover p {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, .7);
 }
 
 .locations-container div:hover {
   background-color: #306B84;
   color: white;
   border: 1px solid #306B84;
+  transform: scale(1.05);
 }
 
 .pokemon-card, .pokemon-battlecard {
@@ -216,3 +248,25 @@ header {
   80% { transform: translate(10px, -10px); border: 1px solid rgba(255, 0, 0, 1);}
   100% { transform: translate(0px, 0px); border: 1px solid rgba(100, 149, 237, .1);}
 }
+
+.bg_empty {background-image: url('../public/landscapes/empty.jpg');}
+.bg_city_1 {background-image: url('../public/landscapes/city_1.jpg');}
+.bg_city_2 {background-image: url('../public/landscapes/city_2.jpg');}
+.bg_city_3 {background-image: url('../public/landscapes/city_3.jpg');}
+.bg_city_4 {background-image: url('../public/landscapes/city_4.jpg');}
+.bg_league_1 {background-image: url('../public/landscapes/league_1.jpg');}
+.bg_mine_1 {background-image: url('../public/landscapes/mine_1.jpg');}
+.bg_windworks_1 {background-image: url('../public/landscapes/windworks_1.jpg');}
+.bg_forest_1 {background-image: url('../public/landscapes/forest_1.jpg');}
+.bg_ironworks_1 {background-image: url('../public/landscapes/ironworks_1.jpg');}
+.bg_coronet_1 {background-image: url('../public/landscapes/coronet_1.jpg');}
+.bg_marsh_1 {background-image: url('../public/landscapes/marsh_1.jpg');}
+.bg_ruins_1 {background-image: url('../public/landscapes/ruins_1.jpg');}
+.bg_road_1 {background-image: url('../public/landscapes/road_1.jpg');}
+.bg_path_1 {background-image: url('../public/landscapes/path_1.jpg');}
+.bg_path_2 {background-image: url('../public/landscapes/path_2.jpg');}
+.bg_gate_1 {background-image: url('../public/landscapes/gate_1.jpg');}
+.bg_mountain_1 {background-image: url('../public/landscapes/mountain_1.jpg');}
+.bg_cave_1 {background-image: url('../public/landscapes/cave_1.jpg');}
+.bg_cave_2 {background-image: url('../public/landscapes/cave_2.jpg');}
+.bg_temple_1 {background-image: url('../public/landscapes/temple_1.jpg');}
