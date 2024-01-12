@@ -161,6 +161,7 @@ h1 {
   width: fit-content;
 }
 
+
 h5  {
   font-weight: 400;
 }
@@ -193,4 +194,25 @@ header {
 .finish p {
   padding: 1rem;
   font-size: 1.5rem;
+}
+
+.opponent-color {
+  color: rgb(156, 48, 48);
+}
+
+.hero-color {
+  color: rgb(35, 145, 70);
+}
+
+.hit {
+  animation: hit-anim .2s ease-in-out;
+}
+
+@keyframes hit-anim {
+  0% { transform: translate(0px, 0px); border: 1px solid rgba(100, 149, 237, .1);}
+  20% { transform: translate(10px, 10px); border: 1px solid rgba(255, 0, 0, 1);}
+  40% { transform: translate(-10px, -10px); border: 1px solid rgb(164, 7, 199);}
+  60% { transform: translate(-10px, 10px); border: 1px solid rgb(66, 7, 137);}
+  80% { transform: translate(10px, -10px); border: 1px solid rgba(255, 0, 0, 1);}
+  100% { transform: translate(0px, 0px); border: 1px solid rgba(100, 149, 237, .1);}
 }

@@ -1,35 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-function MyPokemons({setComponent, myPokemonsName, setMyPokemons}) {
+function MyPokemons({ setComponent, myPokemonsName, setMyPokemons }) {
+  const [loading, setLoading] = useState(true);
 
-    // Lekérjük a saját pokemonjaink adatait és eltároljuk a myPokemons state-ben
-    useEffect(() => {
-        let myPokemonArray = [];
-  
-        const getMyPokemonData = async (name) => {
-          try {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-            const dataJson = await response.json();
-            myPokemonArray.push(dataJson);
-          } catch (error) {
-            console.error('Hiba történt:', error);
-          }
-        };
-        myPokemonsName.forEach( (name) => {
-          getMyPokemonData(name);
-        });
+  useEffect(() => {
+    const getMyPokemonData = async (name) => {
+      try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+        const dataJson = await response.json();
+        return dataJson;
+      } catch (error) {
+        console.error('Hiba történt:', error);
+        return null;
+      }
+    };
+
+    const fetchData = async () => {
+      const promises = myPokemonsName.map(getMyPokemonData);
+
+      try {
+        const myPokemonArray = await Promise.all(promises);
         setMyPokemons(myPokemonArray);
-        setTimeout(()=>setComponent('PokemonSelector'), 300);
-    }, [myPokemonsName, setMyPokemons, setComponent]);
+        setLoading(false);
+        setComponent('PokemonSelector');
+      } catch (error) {
+        console.error('Hiba történt a fetch során:', error);
+      }
+    };
 
+    fetchData();
+  }, [myPokemonsName, setMyPokemons, setComponent]);
 
-
-    return (
-        <div className="mypokemons flex-column h-100 a-center j-center">
-            loading data...
-        </div>
-    );
-
+  return (
+    <div className="mypokemons flex-column h-100 a-center j-center">
+      {loading ? 'loading data...' : 'Data loaded!'}
+    </div>
+  );
 }
-  
+
 export default MyPokemons;

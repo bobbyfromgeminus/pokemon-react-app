@@ -71,19 +71,27 @@ function BattleField({ setComponent, opponent, selectedPokemon, myPokemonsName, 
         const Z = luckyPowder();
         // Kapott képlet alapján kiszámoljuk a sebzés mértékét.
         const hpReducer = ((((2/5+2)*B.attack*60/D.defense)/50)+2)*Z/255;
+
+        // saját pokemonom sebzése
         if (roundCounter%2 === 0) {
             const reducedPokemon = myheroStats;
             reducedPokemon.hp = Math.round((myheroStats.hp - hpReducer) * 100) / 100;
             setMyheroStats(reducedPokemon);
+            document.getElementById('card-opponent').classList.remove('hit');
+            document.getElementById('card-myhero').classList.add('hit');
             if (myheroStats.hp <= 0) {
                 // itt én veszítettem
                 setEndOfGame(true);
                 updateMyPokemons(-1);
             }
+
+        // opponent pokemon sebzése
         } else {
             const reducedPokemon = opponentStats;
             reducedPokemon.hp = Math.round((opponentStats.hp - hpReducer) * 100) / 100
             setOpponentStats(reducedPokemon);
+            document.getElementById('card-opponent').classList.add('hit');
+            document.getElementById('card-myhero').classList.remove('hit');
             if (opponentStats.hp <= 0) {
                 // itt én nyertem
                 setEndOfGame(true);
@@ -95,11 +103,12 @@ function BattleField({ setComponent, opponent, selectedPokemon, myPokemonsName, 
 
     return (
         <div className="battlefield flex-column">
-            <h2>{opponentStats.name} vs {myheroStats.name}</h2>
+            <h2><span className="opponent-color">{opponentStats.name}</span> vs <span className="hero-color">{myheroStats.name}</span></h2>
+            <h5>enemy vs ally</h5>
             <br/>
             <div className="flex">
-                <PokemonBattleCard pokemon={opponentStats}/>
-                <PokemonBattleCard pokemon={myheroStats}/>
+                <PokemonBattleCard pokemon={opponentStats} id={'card-opponent'}/>
+                <PokemonBattleCard pokemon={myheroStats} id={'card-myhero'}/>
             </div>
             <button onClick={() => battleRound()}>FIGHT!!!</button>
             <br/>
